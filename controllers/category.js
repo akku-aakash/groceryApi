@@ -1,5 +1,6 @@
 const formidable = require('formidable')
 const Category = require('../models/category')
+const { deleteFile } = require('../helpers/file')
 
 exports.create = async (req, res) => {
     const fields = req.body;
@@ -23,6 +24,42 @@ exports.create = async (req, res) => {
     })
 }
 
-exports.getcat = (req, res) => {
+exports.categoryById = (req, res, next, id) => {
+    Category.findById(id).exec((err, category) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        req.category = category;
+        next();
+    })
+}
 
+exports.readSingle = (req, res) => {
+    return res.json(req.category);
+}
+
+exports.list = (req, res) => {
+    Category.find().exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        return res.json(data);
+    })
+}
+
+exports.update = (req, res) => {
+
+}
+
+exports.remove = (req, res) => {
+    const category = req.category;
+    if (req.category.banner) {
+        deleteFile(req.category.banner)
+    }
+    category.remove((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        return res.json({ message: 'Category has been deleted successful' });
+    })
 }
