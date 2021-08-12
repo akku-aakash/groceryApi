@@ -59,6 +59,10 @@ const productSchema = new mongoose.Schema({
             requiree: true
         },
     }],
+    tablespecs: [{
+        name: String,
+        value: String
+    }],
     specs: [{
         name: String,
         value: String
