@@ -1,4 +1,3 @@
-const formidable = require('formidable')
 const Category = require('../models/category')
 const { deleteFile } = require('../helpers/file')
 
@@ -11,7 +10,9 @@ exports.create = async (req, res) => {
         name: fields.name,
         active: fields.active,
         banner: req.file.path,
-        filters: filters
+        filters: filters,
+        upToOff: fields.upToOff,
+        description: description
     });
     category.save((err, data) => {
         if (err) {
@@ -44,6 +45,15 @@ exports.list = (req, res) => {
             return res.status(400).json({ message: err });
         }
         return res.json(data);
+    })
+}
+
+exports.filteringdata = (req, res) => {
+    Category.find(req.body).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        res.json(data);
     })
 }
 
