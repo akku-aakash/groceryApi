@@ -4,7 +4,7 @@ const categorySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        maxlength: 30
+        maxlength: 40
     },
     banner: {
         type: String,
@@ -16,6 +16,12 @@ const categorySchema = new mongoose.Schema({
     },
     filters: {
         type: Array
+    },
+    upToOff: {
+        type: Number
+    },
+    description: {
+        type: String
     }
 })
 
