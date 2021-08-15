@@ -19,6 +19,12 @@ const subCategorySchema = new mongoose.Schema({
         type: ObjectId,
         ref: "Category",
         required: true
+    },
+    upToOff: {
+        type: Number
+    },
+    description: {
+        type: String
     }
 })
 

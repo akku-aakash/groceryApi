@@ -12,7 +12,7 @@ exports.create = async (req, res) => {
         banner: req.file.path,
         filters: filters,
         upToOff: fields.upToOff,
-        description: description
+        description: fields.description
     });
     category.save((err, data) => {
         if (err) {
