@@ -6,7 +6,9 @@ exports.create = (req, res) => {
         name: fields.name,
         banner: req.file.path,
         active: fields.active,
-        parentId: fields.parentId
+        parentId: fields.parentId,
+        upToOff: fields.upToOff,
+        description: fields.description
     })
     subcat.save((err, data) => {
         if (err) {
@@ -16,5 +18,14 @@ exports.create = (req, res) => {
             message: 'Subcategory Created Successfully',
             data: data
         });
+    })
+}
+
+exports.list = (req,res) => {
+    Subcategory.find().exec((err,data) => {
+        if(err){
+            return res.status(400).json({ message: err });
+        }
+        return res.json(data);
     })
 }
