@@ -1,11 +1,9 @@
 const Filters = require('../models/filters')
 
 exports.create = (req, res) => {
-    const filteroptions = JSON.parse(req.body.options)
     const filter = new Filters({
         filterName: req.body.filterName,
-        options: filteroptions,
-        categories: req.body.categories
+        options: req.body.options
     })
     filter.save((err, data) => {
         if (err) {
@@ -15,5 +13,14 @@ exports.create = (req, res) => {
             message: 'Filter Created Successfully',
             data: data
         });
+    })
+}
+
+exports.list = (req, res) => {
+    Filters.find().exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        return res.json(data);
     })
 }

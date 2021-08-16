@@ -6,11 +6,7 @@ const filtersSchema = new schema({
         type: String,
         required: true
     },
-    opitons: {
-        type: Array,
-        required: true
-    },
-    categories: {
+    options: {
         type: Array,
         required: true
     }

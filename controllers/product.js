@@ -41,3 +41,26 @@ exports.create = (req, res) => {
         });
     })
 }
+
+exports.lists = (req, res) => {
+    Product.find().populate('category').populate('leafCategory').populate('subCategory').exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        return res.json(data);
+    })
+}
+
+exports.getProductById = (req, res, next, id) => {
+    Product.findById(id).populate('leafCategory').exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        req.product = data;
+        next();
+    })
+}
+
+exports.singleProduct = (req, res) => {
+    return res.json(req.product)
+}
