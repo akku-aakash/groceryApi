@@ -12,6 +12,7 @@ const categoryRouter = require('./routers/category')
 const subcategoryRouter = require('./routers/subcategory')
 const leafcategoryRouter = require('./routers/leafcategory')
 const productRouter = require('./routers/product')
+const filterRouter = require('./routers/filters')
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use('/api', categoryRouter)
 app.use('/api', subcategoryRouter)
 app.use('/api', leafcategoryRouter)
 app.use('/api', productRouter)
+app.use('/api', filterRouter)
 
 app.use('', (req, res) => {
     res.send('Api Route Not Found !!!')
