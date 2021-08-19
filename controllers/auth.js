@@ -27,13 +27,13 @@ exports.sendOTP = (req, res) => {
         to: phone
     })
         .then((messages) => {
-            return res.json({ otp, token, messages });
+            return res.json({ token, messages });
         })
         .catch((err) => {
             return res.status(400).json({ message: err });
         })
 
-
+    // return res.json({ otp, token });
 }
 
 exports.verifyOTP = (req, res) => {
@@ -44,7 +44,7 @@ exports.verifyOTP = (req, res) => {
     if (hashtoken) {
         jwt.verify(hashtoken, process.env.JWT_ACCOUNT_ACTIVATION, (err, decode) => {
             if (err) {
-                return res.status(400).json({ message: 'Otp Expired Login Again' });
+                return res.json({ message: 'Otp Expired Login Again' });
             } else {
                 const { phone, otp } = jwt.decode(hashtoken);
                 if (userotp == otp && userphone == phone) {
@@ -73,7 +73,7 @@ exports.verifyOTP = (req, res) => {
 
                                     return res.json({
                                         token,
-                                        user: {
+                                        userdata: {
                                             _id: data._id
                                         }
                                     })
@@ -93,8 +93,7 @@ exports.verifyOTP = (req, res) => {
                         }
                     })
                 } else {
-                    console.log('Not Authenticated')
-                    return res.status(400).json({ message: 'Incorrect Otp' });
+                    return res.json({ message: 'Incorrect Otp' });
                 }
             }
         })

@@ -1,9 +1,23 @@
 const express = require('express')
 const router = express.Router()
-const { userById, read } = require('../controllers/user')
+const { userById, read, updateUser } = require('../controllers/user')
 const { isAuth, requireSignin } = require('../controllers/auth')
+const multer = require('multer')
+
+
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/user/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+})
+
+var upload = multer({ storage: storage })
 
 router.get('/user/:userId', requireSignin, isAuth, read)
+router.put('/user/:userId', requireSignin, isAuth, upload.single(`photo`), updateUser)
 
 router.param('userId', userById)
 
