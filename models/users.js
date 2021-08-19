@@ -5,13 +5,23 @@ const Userschema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    name: {
-        type: String,
-        trim: true
-    },
     email: {
         type: String
-    }
+    },
+    firstName: {
+        type: String
+    },
+    lastName: {
+        type: String
+    },
+    imgURL: {
+        type: String
+    },
+    address: [{
+        city: String,
+        address: String,
+        zip: Number
+    }]
 })
 
 module.exports = User = mongoose.model('User', Userschema);
