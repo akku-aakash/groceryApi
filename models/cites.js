@@ -5,6 +5,15 @@ const citySchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    minOrder: {
+        type: Number
+    },
+    deliveryCharge: {
+        type: Number
+    },
+    state: {
+        type: String
     }
 });
 
