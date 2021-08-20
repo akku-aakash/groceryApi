@@ -26,8 +26,7 @@ exports.create = (req, res) => {
 }
 
 exports.listOrders = (req, res) => {
-    Order.find()
-        .populate('user', '_id firstName lastName phone email')
+    Order.find({user: req.profile._id})
         .sort('-created')
         .exec((err, orders) => {
             if (err) {
