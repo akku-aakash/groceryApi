@@ -39,16 +39,4 @@ exports.updateUser = (req, res) => {
             return res.json({ message: "User updated Successfully", data });
         }
     })
-
-    // let form = new formidable.IncomingForm()
-    // form.keepExtensions = true
-    // form.multiples = true;
-    // form.parse(req, (err, fields, files) => {
-    //     if (err) {
-    //         console.log(err)
-    //     }
-    //     
-    //     console.log({user, fields, filePath: req.file.path })
-    //     return res.json({ user, fields, filePath: req.file.path });
-    // })
 }

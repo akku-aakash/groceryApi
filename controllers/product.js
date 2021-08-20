@@ -64,3 +64,20 @@ exports.getProductById = (req, res, next, id) => {
 exports.singleProduct = (req, res) => {
     return res.json(req.product)
 }
+
+exports.decreaseQuantity = (req, res, next) => {
+    let bulkOps = req.body.order.products.map((item) => {
+        return {
+            updateOne: {
+                filter: { _id: item.product },
+                update: { $inc: { quantity: -item.count, sold: +item.count } }
+            }
+        }
+    });
+    Product.bulkWrite(bulkOps, {}, (err, products) => {
+        if (err) {
+            return res.status(400).json({ error: 'could not update product' });
+        }
+        next();
+    })
+}

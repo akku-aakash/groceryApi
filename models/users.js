@@ -21,7 +21,15 @@ const Userschema = new mongoose.Schema({
         city: String,
         address: String,
         zip: Number
-    }]
+    }],
+    role: {
+        type: Number,
+        default: 0
+    },
+    coins: {
+        type: Number,
+        default: 0
+    }
 })
 
 module.exports = User = mongoose.model('User', Userschema);
