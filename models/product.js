@@ -73,6 +73,13 @@ const productSchema = new mongoose.Schema({
     },
     imgcollection: {
         type: Array
+    },
+    productQuantity: {
+        type: String
+    },
+    varientID: {
+        type: String,
+        default: ''
     }
 })
 
