@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
-const { create } = require('../controllers/leafcategory');
+const { create, list } = require('../controllers/leafcategory');
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -15,8 +15,6 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 router.post('/leafcategory/create', upload.single('banner'), create);
-router.get('/leafcategory', (req, res) => {
-    return res.json({ message: 'Hello From Category' });
-})
+router.get('/leafcategory', list)
 
 module.exports = router;
