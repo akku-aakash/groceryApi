@@ -18,3 +18,12 @@ exports.create = (req, res) => {
         });
     })
 }
+
+exports.list = (req, res) => {
+    Leafcategory.find().exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        return res.json(data);
+    })
+}
