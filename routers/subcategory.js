@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
-const { create, list } = require('../controllers/subcategory');
+const { create, list, lists } = require('../controllers/subcategory');
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -16,5 +16,6 @@ var upload = multer({ storage: storage })
 
 router.post('/subcategory/create', upload.single('banner'), create);
 router.get('/subcategory', list)
+router.get('/admin/subcategory', lists)
 
 module.exports = router;

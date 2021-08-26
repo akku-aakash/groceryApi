@@ -29,3 +29,14 @@ exports.list = (req,res) => {
         return res.json(data);
     })
 }
+
+exports.lists = (req,res) => {
+    Subcategory.find()
+    .populate('parentId', 'name')
+    .exec((err,data) => {
+        if(err){
+            return res.status(400).json({ message: err });
+        }
+        return res.json(data);
+    })
+}
