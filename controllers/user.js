@@ -1,5 +1,5 @@
 const User = require('../models/users');
-const {deleteFile} = require('../helpers/file')
+const { deleteFile } = require('../helpers/file')
 
 exports.userById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
@@ -19,7 +19,7 @@ exports.updateUser = (req, res) => {
 
     const user = req.profile;
 
-    if(user.imgURL){
+    if (user.imgURL) {
         deleteFile(user.imgURL)
     }
     user.firstName = req.body.firstName
@@ -39,4 +39,14 @@ exports.updateUser = (req, res) => {
             return res.json({ message: "User updated Successfully", data });
         }
     })
+}
+
+exports.lists = (req, res) => {
+    User.find()
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({ message: err });
+            }
+            return res.json(data);
+        })
 }
