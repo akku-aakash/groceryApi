@@ -29,7 +29,9 @@ exports.create = (req, res) => {
         tablespecs: tablespecs,
         specs: specs,
         imgcollection: imgcollection,
-        image: imgcollection[0]
+        image: imgcollection[0],
+        productQuantity: fields.productQuantity,
+        varientID: fields.varientID
     })
     product.save((err, data) => {
         if (err) {

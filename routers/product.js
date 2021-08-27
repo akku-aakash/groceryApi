@@ -17,7 +17,7 @@ var upload = multer({ storage: storage })
 router.post('/product/create', upload.array('imgcollection', 8), create);
 router.get('/product', lists)
 router.get('/product/:productId', singleProduct)
-router.get('/productbycat', prodductByCat )
+router.post('/productbycat', prodductByCat )
 
 router.param('productId', getProductById);
 
