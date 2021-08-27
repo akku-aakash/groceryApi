@@ -52,13 +52,15 @@ exports.lists = (req, res) => {
 }
 
 exports.getProductById = (req, res, next, id) => {
-    Product.findById(id).populate('leafCategory').exec((err, data) => {
-        if (err) {
-            return res.status(400).json({ message: err });
-        }
-        req.product = data;
-        next();
-    })
+    Product.findById(id)
+        .populate('leafCategory')
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({ message: err });
+            }
+            req.product = data;
+            next();
+        })
 }
 
 exports.singleProduct = (req, res) => {
@@ -80,4 +82,14 @@ exports.decreaseQuantity = (req, res, next) => {
         }
         next();
     })
+}
+
+exports.prodductByCat = (req, res) => {
+    Product.find(req.body)
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({ message: err });
+            }
+            return res.json(data);
+        })
 }
