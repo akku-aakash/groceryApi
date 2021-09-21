@@ -18,7 +18,11 @@ const orderSchema = new mongoose.Schema({
     products: [CartItemsSchema],
     transaction_id: { type: String },
     amount: { type: Number },
-    address: String,
+    address: {
+        address: String,
+        city: String,
+        zip: String
+    },
     offerApplied: String,
     orderType: String,
     status: {
@@ -27,7 +31,10 @@ const orderSchema = new mongoose.Schema({
         enum: ["Not processed", "Processing", "Shipped", "Delivered", "Cancelled"]
     },
     updated: Date,
-    user: { type: ObjectId, ref: "User" }
+    user: { type: ObjectId, ref: "User" },
+    deliveryType: { type: String },
+    expectedDelivery: { type: Date },
+    deliveryBoy: { type: ObjectId, ref: 'User' }
 },
     { timestamps: true }
 );
