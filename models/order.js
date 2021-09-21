@@ -34,7 +34,10 @@ const orderSchema = new mongoose.Schema({
     user: { type: ObjectId, ref: "User" },
     deliveryType: { type: String },
     expectedDelivery: { type: Date },
-    deliveryBoy: { type: ObjectId, ref: 'User' }
+    deliveryBoy: { type: ObjectId, ref: 'User' },
+    tax: { type: Number },
+    deliveryCharge: { type: Number },
+    offPrice: { type: Number }
 },
     { timestamps: true }
 );
