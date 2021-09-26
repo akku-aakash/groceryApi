@@ -17,6 +17,7 @@ const authRouter = require('./routers/auth')
 const UserRouter = require('./routers/user')
 const OrderRouter = require('./routers/order')
 const CityRouter = require('./routers/cites')
+const OfferRouter = require('./routers/offer')
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -38,6 +39,7 @@ app.use('/api', filterRouter)
 app.use('/api', UserRouter)
 app.use('/api', OrderRouter)
 app.use('/api', CityRouter)
+app.use('/api', OfferRouter)
 
 app.use('', (req, res) => {
     res.send('Api Route Not Found !!!')
