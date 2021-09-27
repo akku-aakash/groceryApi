@@ -28,7 +28,7 @@ exports.create = (req, res) => {
 }
 
 exports.list = (req, res) => {
-    Offer.find().exec((err, data) => {
+    Offer.find({ active: true }).exec((err, data) => {
         if (err) {
             return res.status(400).json({ message: err });
         }

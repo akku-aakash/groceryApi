@@ -16,6 +16,6 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 router.post('/offer/create', upload.single('banner'), create);
-router.get('/offer', list)
+router.get('/offer', list);
 
 module.exports = router

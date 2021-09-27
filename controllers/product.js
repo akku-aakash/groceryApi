@@ -95,3 +95,13 @@ exports.prodductByCat = (req, res) => {
             return res.json(data);
         })
 }
+
+exports.prodductByCat = (req, res) => {
+    Product.find(req.body)
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({ message: err });
+            }
+            return res.json(data);
+        })
+}
