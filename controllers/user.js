@@ -31,6 +31,7 @@ exports.updateUser = (req, res) => {
         address: req.body.address,
         zip: req.body.zip
     }]
+    user.copounsused = []
 
     user.save((err, data) => {
         if (err) {
@@ -39,6 +40,11 @@ exports.updateUser = (req, res) => {
             return res.json({ message: "User updated Successfully", data });
         }
     })
+}
+
+exports.updateAddress = (req, res) => {
+    
+
 }
 
 exports.lists = (req, res) => {

@@ -29,6 +29,11 @@ const Userschema = new mongoose.Schema({
     coins: {
         type: Number,
         default: 0
+    },
+    copounsused: [],
+    subscription: {
+        type: String,
+        default: 'member'
     }
 })
 
