@@ -38,9 +38,9 @@ const orderSchema = new mongoose.Schema({
     tax: { type: Number },
     deliveryCharge: { type: Number },
     offPrice: { type: Number }
-},
-    { timestamps: true }
-);
+}, {
+    timestamps: true
+});
 
 Order = mongoose.model('Order', orderSchema);
 
