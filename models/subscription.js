@@ -6,7 +6,7 @@ const SubscriptionSchema = new Schema({
     title: {
         type: String,
         default: "elite",
-        enum: ["elite", "wallet"]
+        enum: ["elite", "walletadd", "walletdel"]
     },
     userId: {
         type: ObjectId,
@@ -16,6 +16,14 @@ const SubscriptionSchema = new Schema({
     transactionId: {
         type: String,
         required: true
+    },
+    amount : {
+        type: Number,
+        required: true
+    },
+    orderId: {
+        type: ObjectId,
+        ref:"Order"
     }
 }, {
     timestamps: true
