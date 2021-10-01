@@ -86,16 +86,6 @@ exports.decreaseQuantity = (req, res, next) => {
     })
 }
 
-// exports.prodductByCat = (req, res) => {
-//     Product.find(req.body)
-//         .exec((err, data) => {
-//             if (err) {
-//                 return res.status(400).json({ message: err });
-//             }
-//             return res.json(data);
-//         })
-// }
-
 exports.prodductByCat = (req, res) => {
     // console.log(req.query)
     // console.log(req.body)
@@ -106,8 +96,20 @@ exports.prodductByCat = (req, res) => {
         .limit(parseInt(limit))
         .exec((err, data) => {
             if (err) {
+                console.log(err)
                 return res.status(400).json({ message: err });
             }
             return res.json(data);
         })
+}
+
+exports.serachprod = (req, res) => {
+    name = req.query.name
+    Product.find({ name: { $regex: `${name}`, $options: 'i' } }).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        } else {
+            return res.json(data);
+        }
+    })
 }
