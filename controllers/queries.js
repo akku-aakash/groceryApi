@@ -78,7 +78,7 @@ exports.cancelationCreate = (req, res) => {
                         return res.status(400).json({ error: err });
                     }
                     return res.json({
-                        message: 'Cancellation Added Successfully !',
+                        message: 'Cancellation Request Added Successfully !',
                         data: data
                     });
                 })

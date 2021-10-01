@@ -27,7 +27,7 @@ exports.create = (req, res) => {
 
 exports.listOrders = (req, res) => {
     Order.find({ user: req.profile._id })
-        .sort('-created')
+        .sort('-createdAt')
         .exec((err, orders) => {
             if (err) {
                 return res.status(400).json({
@@ -40,7 +40,7 @@ exports.listOrders = (req, res) => {
 
 exports.allorders = (req, res) => {
     Order.find()
-        .sort('-created')
+        .sort('-createdAt')
         .exec((err, orders) => {
             if (err) {
                 return res.status(400).json({
