@@ -86,18 +86,24 @@ exports.decreaseQuantity = (req, res, next) => {
     })
 }
 
-exports.prodductByCat = (req, res) => {
-    Product.find(req.body)
-        .exec((err, data) => {
-            if (err) {
-                return res.status(400).json({ message: err });
-            }
-            return res.json(data);
-        })
-}
+// exports.prodductByCat = (req, res) => {
+//     Product.find(req.body)
+//         .exec((err, data) => {
+//             if (err) {
+//                 return res.status(400).json({ message: err });
+//             }
+//             return res.json(data);
+//         })
+// }
 
 exports.prodductByCat = (req, res) => {
+    // console.log(req.query)
+    // console.log(req.body)
+    const { skip, limit, orderBy } = req.query
     Product.find(req.body)
+        .sort(orderBy)
+        .skip(parseInt(skip))
+        .limit(parseInt(limit))
         .exec((err, data) => {
             if (err) {
                 return res.status(400).json({ message: err });
