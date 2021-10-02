@@ -43,7 +43,7 @@ exports.updateUser = (req, res) => {
 }
 
 exports.updateAddress = (req, res) => {
-    
+
 
 }
 
@@ -54,5 +54,16 @@ exports.lists = (req, res) => {
                 return res.status(400).json({ message: err });
             }
             return res.json(data);
+        })
+}
+
+exports.deliveryBoy = (req, res) => {
+    User.find({ role: 2 })
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({ message: 'Something went wrong' });
+            } else {
+                return res.json(data);
+            }
         })
 }
