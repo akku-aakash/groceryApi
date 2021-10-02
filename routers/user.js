@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { userById, read, updateUser, lists } = require('../controllers/user')
+const { userById, deliveryBoy, read, updateUser, lists } = require('../controllers/user')
 const { isAuth, requireSignin } = require('../controllers/auth')
 const multer = require('multer')
 
@@ -18,6 +18,8 @@ var upload = multer({ storage: storage })
 
 router.get('/user/:userId', requireSignin, isAuth, read)
 router.put('/user/:userId', requireSignin, isAuth, upload.single(`photo`), updateUser)
+router.get("/deliveryboy", deliveryBoy);
+
 router.get('/admin/allusers', lists)
 
 router.param('userId', userById)

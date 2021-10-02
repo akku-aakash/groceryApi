@@ -3,6 +3,7 @@ const { Order } = require('../models/order');
 exports.orderById = (req, res, next, id) => {
     Order.findById(id)
         .populate('products.product', 'name price')
+        .populate('user')
         .exec((err, res) => {
             if (err || !res) {
                 return res.status(400).json(err);
@@ -10,6 +11,10 @@ exports.orderById = (req, res, next, id) => {
             req.order = res;
             next()
         })
+}
+
+exports.Orderfind = (req, res) => {
+    return res.json(req.order);
 }
 
 exports.create = (req, res) => {
@@ -27,7 +32,7 @@ exports.create = (req, res) => {
 
 exports.listOrders = (req, res) => {
     Order.find({ user: req.profile._id })
-        .sort('-created')
+        .sort('-createdAt')
         .exec((err, orders) => {
             if (err) {
                 return res.status(400).json({
@@ -40,7 +45,7 @@ exports.listOrders = (req, res) => {
 
 exports.allorders = (req, res) => {
     Order.find()
-        .sort('-created')
+        .sort('-createdAt')
         .exec((err, orders) => {
             if (err) {
                 return res.status(400).json({
@@ -49,4 +54,42 @@ exports.allorders = (req, res) => {
             }
             res.json(orders)
         })
+}
+
+exports.updateStaus = (req, res) => {
+    const { deliveryname, status } = req.body
+    if(deliveryname){
+        Order.updateOne(
+            { _id: req.order._id },
+            { status: status, deliveryBoy: deliveryname }, (err, save) => {
+                if (err) {
+                    res.json({
+                        message: 'Something Went Wrong in updating user !'
+                    });
+                } else {
+                    res.json({
+                        message: 'Order Updated !',
+                        data: save
+                    });
+                }
+            }
+        )
+    }else{
+        Order.updateOne(
+            { _id: req.order._id },
+            { status: status }, (err, save) => {
+                if (err) {
+                    res.json({
+                        message: 'Something Went Wrong in updating user !'
+                    });
+                } else {
+                    res.json({
+                        message: 'Order Updated !',
+                        data: save
+                    });
+                }
+            }
+        )
+    }
+
 }
