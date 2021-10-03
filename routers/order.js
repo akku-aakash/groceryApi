@@ -9,7 +9,7 @@ const { decreaseQuantity } = require('../controllers/product')
 router.post('/order/create/:userId', requireSignin, isAuth, decreaseQuantity, create);
 router.get('/order/list/:userId', requireSignin, isAuth, listOrders)
 router.get('/order/allorder', allorders);
-router.get('/order/deliveryId', deliveryBoy);
+router.get('/orders/deliveryId', deliveryBoy);
 router.get('/order/:orderId', Orderfind)
 router.put('/update/order-status/:orderId', updateStaus)
 
