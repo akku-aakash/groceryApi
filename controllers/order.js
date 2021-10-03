@@ -43,6 +43,21 @@ exports.listOrders = (req, res) => {
         })
 }
 
+exports.deliveryBoy = (req, res) => {
+    const { delId } = req.query
+    Order.find({ deliveryBoy: delId })
+        .sort('-createdAt')
+        .exec((err, orders) => {
+            if (err) {
+                return res.status(400).json({
+                    error: err
+                })
+            }
+            console.log(orders)
+            res.json(orders)
+        })
+}
+
 exports.allorders = (req, res) => {
     Order.find()
         .sort('-createdAt')
@@ -58,7 +73,7 @@ exports.allorders = (req, res) => {
 
 exports.updateStaus = (req, res) => {
     const { deliveryname, status } = req.body
-    if(deliveryname){
+    if (deliveryname) {
         Order.updateOne(
             { _id: req.order._id },
             { status: status, deliveryBoy: deliveryname }, (err, save) => {
@@ -74,7 +89,7 @@ exports.updateStaus = (req, res) => {
                 }
             }
         )
-    }else{
+    } else {
         Order.updateOne(
             { _id: req.order._id },
             { status: status }, (err, save) => {
