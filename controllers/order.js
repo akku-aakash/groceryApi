@@ -1,4 +1,5 @@
 const { Order } = require('../models/order');
+const User = require('../models/users')
 
 exports.orderById = (req, res, next, id) => {
     Order.findById(id)
@@ -19,13 +20,31 @@ exports.Orderfind = (req, res) => {
 
 exports.create = (req, res) => {
     req.body.order.user = req.profile
+    const { offerApplied } = req.body.order
+    const { copounsused } = req.profile
     const order = new Order(req.body.order)
 
     order.save((err, data) => {
         if (err) {
             return res.status(400).json({ message: err });
         } else {
-            return res.json(data);
+            if (offerApplied) {
+                copounsused.push(offerApplied)
+                User.updateOne(
+                    { _id: req.profile._id },
+                    { copounsused: copounsused }, (err, save) => {
+                        if (err) {
+                            res.json({
+                                message: 'Something Went Wrong in updating user !'
+                            });
+                        } else {
+                            return res.json({ data: data, save: save })
+                        }
+                    }
+                )
+            } else {
+                return res.json(data)
+            }
         }
     })
 }
