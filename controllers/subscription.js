@@ -21,21 +21,39 @@ exports.create = (req, res) => {
             if (err) {
                 return res.status(400).json({ error: err });
             } else {
-                User.updateOne(
-                    { _id: userId },
-                    { $inc: { coins: parseInt(amount) } }, (err, save) => {
-                        if (err) {
-                            res.json({
-                                message: 'Something Went Wrong in updating user !'
-                            });
-                        } else {
-                            res.json({
-                                message: 'Transaction Added !',
-                                data: data
-                            });
+                if(title === 'walletdel'){
+                    User.updateOne(
+                        { _id: userId },
+                        { $inc: { coins: -parseInt(amount) } }, (err, save) => {
+                            if (err) {
+                                res.json({
+                                    message: 'Something Went Wrong in updating user !'
+                                });
+                            } else {
+                                res.json({
+                                    message: 'Transaction Added !',
+                                    data: data
+                                });
+                            }
                         }
-                    }
-                )
+                    )
+                }else{
+                    User.updateOne(
+                        { _id: userId },
+                        { $inc: { coins: parseInt(amount) } }, (err, save) => {
+                            if (err) {
+                                res.json({
+                                    message: 'Something Went Wrong in updating user !'
+                                });
+                            } else {
+                                res.json({
+                                    message: 'Transaction Added !',
+                                    data: data
+                                });
+                            }
+                        }
+                    )
+                }
             }
         })
     } else {

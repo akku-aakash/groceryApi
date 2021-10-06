@@ -67,3 +67,22 @@ exports.deliveryBoy = (req, res) => {
             }
         })
 }
+
+exports.updateWallet = (req, res ) => {
+    const amount = req.body.amount
+    User.updateOne(
+        { _id: req.profile._id },
+        { $inc: { coins: -parseInt(amount) } }, (err, save) => {
+            if (err) {
+                res.json({
+                    message: 'Something Went Wrong in updating user !'
+                });
+            } else {
+                res.json({
+                    message: 'Transaction Added !',
+                    data: save
+                });
+            }
+        }
+    )
+}

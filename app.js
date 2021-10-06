@@ -23,6 +23,7 @@ const FeedbackRouter = require('./routers/feedback')
 const SubscriptionRouter = require('./routers/subscription')
 const CancellationRouter = require('./routers/cancellation')
 const Razorpay = require('./routers/razorpay')
+const BannerRouter = require('./routers/banner')
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -50,6 +51,8 @@ app.use('/api', FeedbackRouter)
 app.use('/api', SubscriptionRouter)
 app.use('/api', CancellationRouter)
 app.use('/api', Razorpay)
+app.use('/api', BannerRouter)
+
 
 app.use('', (req, res) => {
     res.send('Api Route Not Found !!!')
