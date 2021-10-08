@@ -12,7 +12,7 @@ exports.sendOTP = (req, res) => {
 
     const token = jwt.sign(
         {
-            phone,
+            phone, 
             otp
         },
         process.env.JWT_ACCOUNT_ACTIVATION,
