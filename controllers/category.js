@@ -1,6 +1,7 @@
 const Category = require('../models/category')
 const { deleteFile } = require('../helpers/file')
-
+const _ = require('lodash')
+ 
 exports.create = async (req, res) => {
     const fields = req.body;
     // console.log(JSON.parse(fields.noob))
@@ -57,8 +58,36 @@ exports.filteringdata = (req, res) => {
     })
 }
 
-exports.update = (req, res) => {
+exports.updateCategory = (req, res) => {
+    let banner = req.category
+    banner = _.extend(banner, req.body)
+    banner.save((err, result) => {
+        if (err) {
+            return res.json({ message: err });
+        } else {
+            return res.json(result);
+        }
+    })    
+}
 
+exports.updateImage = (req, res) => {
+    const vaarr = req.category
+    if (vaarr.banner) {
+        try {
+            deleteFile(vaarr.banner)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    let banner = req.category
+    banner = _.extend(banner, { banner: req.file.path })
+    banner.save((err, result) => {
+        if (err) {
+            return res.json({ message: err });
+        } else {
+            return res.json(result);
+        }
+    })
 }
 
 exports.remove = (req, res) => {

@@ -61,10 +61,10 @@ exports.updateBanner = (req, res) => {
 exports.updateImage = (req, res) => {
     const vaarr = req.banner
     if (vaarr.banner) {
-        try{
+        try {
             deleteFile(vaarr.banner)
-        }catch(err){
-console.log(err)
+        } catch (err) {
+            console.log(err)
         }
     }
     let banner = req.banner
