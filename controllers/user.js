@@ -128,7 +128,7 @@ exports.editAddress = async (req, res) => {
   let user = await req.profile;
   const { _id, city, address, zip } = req.body
   var index = null;
- 
+
   await user.address.forEach((doc, ind) => {
     if (doc._id == _id) {
       index = ind
@@ -153,3 +153,37 @@ exports.editAddress = async (req, res) => {
     }
   })
 };
+
+exports.serachprod = (req, res) => {
+  name = req.query.name
+  User.find({ $or: [{ firstName: { $regex: `${name}`, $options: 'i' } }, { email: { $regex: `${name}`, $options: 'i' } }] }).exec((err, data) => {
+    if (err) {
+      return res.status(400).json({ message: err });
+    } else {
+      return res.json(data);
+    }
+  })
+}
+
+exports.swithuserrole = async (req, res) => {
+  let user = await req.profile
+  if (user.role == 0 || user.role == 1) {
+    user.role = 2
+    user.save((err, result) => {
+      if (err) {
+        return res.json({ message: err });
+      } else {
+        return res.json(result);
+      }
+    })
+  } else {
+    user.role = 0
+    user.save((err, result) => {
+      if (err) {
+        return res.json({ message: err });
+      } else {
+        return res.json(result);
+      }
+    })
+  }
+}
