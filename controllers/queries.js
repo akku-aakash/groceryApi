@@ -160,7 +160,7 @@ exports.getCanellation = (req, res) => {
     const skipp = req.query.skipp ? req.query.skipp : 0;
     Cancellation.find()
     .sort({ 'createdAt': -1 })
-    .populate('order')
+    .populate("orderId")
     .skip(skipp)
     .limit(limit)
     .exec((err, data) => {
