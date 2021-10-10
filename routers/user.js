@@ -9,7 +9,9 @@ const {
   updateWallet,
   getUserById,
   updateAddress,
-  editAddress
+  editAddress,
+  serachprod,
+  swithuserrole
 } = require("../controllers/user");
 const { isAuth, requireSignin } = require("../controllers/auth");
 const multer = require("multer");
@@ -36,7 +38,9 @@ router.put(
 router.put('/user/add/address/:userId', updateAddress)
 router.put('/user/edit/address/:userId', editAddress)
 router.get("/deliveryboy", deliveryBoy);
+router.get('/search/user', serachprod)
 router.put("/update/wallet/:userId", updateWallet);
+router.put("/switch/role/:userId", swithuserrole);
 
 router.get("/admin/allusers", lists);
 router.get("/admin/user/:userId", getUserById);
