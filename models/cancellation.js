@@ -28,6 +28,10 @@ const CanellationSchema = new Schema({
         type: ObjectId,
         required: true,
         ref: "Order"
+    },
+    isSolved: {
+        type: Boolean,
+        default: false,
     }
 }, {
     timestamps: true
