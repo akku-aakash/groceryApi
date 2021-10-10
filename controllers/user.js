@@ -1,5 +1,6 @@
 const User = require("../models/users");
 const { deleteFile } = require("../helpers/file");
+const _ = require('lodash')
 
 exports.userById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
@@ -43,8 +44,6 @@ exports.updateUser = (req, res) => {
     }
   });
 };
-
-exports.updateAddress = (req, res) => {};
 
 exports.lists = (req, res) => {
   User.find().exec((err, data) => {
@@ -102,4 +101,55 @@ exports.getUserById = async (req, res) => {
   user.imgURL = user.imgURL.replace(/\\/g, "/");
 
   res.status(200).json({ user });
+};
+
+exports.updateAddress = (req, res) => {
+  let user = req.profile;
+
+  user.address = [
+    ...user.address,
+    {
+      city: req.body.city,
+      address: req.body.address,
+      zip: req.body.zip,
+    },
+  ];
+  // user = _.extend(user, {add})
+  user.save((err, result) => {
+    if (err) {
+      return res.json({ message: err });
+    } else {
+      return res.json(result);
+    }
+  })
+};
+
+exports.editAddress = async (req, res) => {
+  let user = await req.profile;
+  const { _id, city, address, zip } = req.body
+  var index = null;
+ 
+  await user.address.forEach((doc, ind) => {
+    if (doc._id == _id) {
+      index = ind
+    }
+  })
+
+  if (index != null) {
+    user.address[index] = {
+      _id: _id,
+      city: city,
+      address: address,
+      zip: zip,
+    }
+  }
+
+  // user = _.extend(user, {add})
+  user.save((err, result) => {
+    if (err) {
+      return res.json({ message: err });
+    } else {
+      return res.json(result);
+    }
+  })
 };

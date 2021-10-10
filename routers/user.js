@@ -8,8 +8,10 @@ const {
   lists,
   updateWallet,
   getUserById,
+  updateAddress,
+  editAddress
 } = require("../controllers/user");
-const { isAuth, requireSignin, isAdmin } = require("../controllers/auth");
+const { isAuth, requireSignin } = require("../controllers/auth");
 const multer = require("multer");
 
 var storage = multer.diskStorage({
@@ -31,6 +33,8 @@ router.put(
   upload.single(`photo`),
   updateUser
 );
+router.put('/user/add/address/:userId', updateAddress)
+router.put('/user/edit/address/:userId', editAddress)
 router.get("/deliveryboy", deliveryBoy);
 router.put("/update/wallet/:userId", updateWallet);
 
