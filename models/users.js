@@ -34,6 +34,9 @@ const Userschema = new mongoose.Schema({
     subscription: {
         type: String,
         default: 'member'
+    },
+    fcmtoken: {
+        type: String
     }
 })
 

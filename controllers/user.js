@@ -118,7 +118,9 @@ exports.updateAddress = (req, res) => {
   user.save((err, result) => {
     if (err) {
       return res.json({ message: err });
+      console.log(err)
     } else {
+      console.log(result)
       return res.json(result);
     }
   })
@@ -186,4 +188,8 @@ exports.swithuserrole = async (req, res) => {
       }
     })
   }
+}
+
+exports.updateUsernow = (req, res) => {
+  let user  = req.profile
 }

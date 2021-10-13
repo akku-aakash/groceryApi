@@ -91,16 +91,30 @@ exports.deliveryBoy = (req, res) => {
 };
 
 exports.allorders = (req, res) => {
-  Order.find()
-    .sort("-createdAt")
-    .exec((err, orders) => {
-      if (err) {
-        return res.status(400).json({
-          error: err,
-        });
-      }
-      res.json(orders);
-    });
+  const { date } = req.query
+  if (date) {
+    Order.find({ createdAt: { $gt: date } })
+      .sort("-createdAt")
+      .exec((err, orders) => {
+        if (err) {
+          return res.status(400).json({
+            error: err,
+          });
+        }
+        res.json(orders);
+      });
+  } else {
+    Order.find()
+      .sort("-createdAt")
+      .exec((err, orders) => {
+        if (err) {
+          return res.status(400).json({
+            error: err,
+          });
+        }
+        res.json(orders);
+      });
+  }
 };
 
 exports.updateStaus = (req, res) => {
