@@ -1,5 +1,6 @@
 const Product = require('../models/product')
-
+const _ = require('lodash')
+ 
 exports.create = (req, res) => {
     const fields = req.body;
     const filterValue = JSON.parse(fields.filterValue)
@@ -55,7 +56,7 @@ exports.lists = (req, res) => {
 
 exports.getProductById = (req, res, next, id) => {
     Product.findById(id)
-        .populate('leafCategory')
+        // .populate('leafCategory')
         .exec((err, data) => {
             if (err) {
                 return res.status(400).json({ message: err });
@@ -111,5 +112,50 @@ exports.serachprod = (req, res) => {
         } else {
             return res.json(data);
         }
+    })
+}
+
+exports.updateProduct = (req, res) => {
+    let banner = req.product
+    banner = _.extend(banner, req.body)
+    banner.save((err, result) => {
+        if (err) {
+            return res.status(400).json({ message: 'Something Went Wrong !!!' });
+        } else {
+            return res.json({message : "Product Update Successfully !!!" , data: result});
+        }
+    })    
+}
+
+exports.updateImage = (req, res) => {
+    const vaarr = req.category
+    if (vaarr.banner) {
+        try {
+            deleteFile(vaarr.banner)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    let banner = req.category
+    banner = _.extend(banner, { banner: req.file.path })
+    banner.save((err, result) => {
+        if (err) {
+            return res.json({ message: err });
+        } else {
+            return res.json(result);
+        }
+    })
+}
+
+exports.remove = (req, res) => {
+    const category = req.product;
+    // if (req.category.banner) {
+    //     deleteFile(req.category.banner)
+    // }
+    category.remove((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        return res.json({ message: 'Product has been deleted successful' });
     })
 }

@@ -6,35 +6,35 @@ const _ = require('lodash')
 // FETCH BY ID
 exports.feedbackById = (req, res, next, id) => {
     Feedback.findById(id)
-    .exec((err, res) => {
-      if (err || !res) {
-        return res.status(400).json(err);
-      }
-      req.feedback = res;
-      next();
-    });
+        .exec((err, res) => {
+            if (err || !res) {
+                return res.status(400).json(err);
+            }
+            req.feedback = res;
+            next();
+        });
 }
 
 exports.reportById = (req, res, next, id) => {
     Queries.findById(id)
-    .exec((err, res) => {
-      if (err || !res) {
-        return res.status(400).json(err);
-      }
-      req.query = res;
-      next();
-    });
+        .exec((err, res) => {
+            if (err || !res) {
+                return res.status(400).json(err);
+            }
+            req.query = res;
+            next();
+        });
 }
 
 exports.canellationById = (req, res, next, id) => {
     Cancellation.findById(id)
-    .exec((err, res) => {
-      if (err || !res) {
-        return res.status(400).json(err);
-      }
-      req.cancellation = res;
-      next();
-    });
+        .exec((err, res) => {
+            if (err || !res) {
+                return res.status(400).json(err);
+            }
+            req.cancellation = res;
+            next();
+        });
 }
 
 
@@ -144,29 +144,56 @@ exports.getreport = (req, res) => {
     const limit = req.query.lim ? req.query.lim : 50;
     const skipp = req.query.skipp ? req.query.skipp : 0;
     Queries.find()
-    .sort({ 'createdAt': -1 })
-    .skip(skipp)
-    .limit(limit)
-    .exec((err, data) => {
-        if (err) {
-            return res.status(400).json({ message: err });
-        }
-        return res.json(data);
-    })
+        .sort({ 'createdAt': -1 })
+        .skip(skipp)
+        .limit(limit)
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({ message: err });
+            }
+            return res.json(data);
+        })
 }
 
 exports.getCanellation = (req, res) => {
     const limit = req.query.lim ? req.query.lim : 50;
     const skipp = req.query.skipp ? req.query.skipp : 0;
     Cancellation.find()
-    .sort({ 'createdAt': -1 })
-    .populate("orderId")
-    .skip(skipp)
-    .limit(limit)
-    .exec((err, data) => {
+        .sort({ 'createdAt': -1 })
+        .populate("orderId")
+        .skip(skipp)
+        .limit(limit)
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({ message: err });
+            }
+            return res.json(data);
+        })
+}
+
+
+
+// Edit Status
+exports.updateCancellation = (req, res) => {
+    let query = req.cancellation
+    query = _.extend(query, req.body)
+    query.save((err, result) => {
         if (err) {
-            return res.status(400).json({ message: err });
+            return res.status(400).json({ message: 'Something Went Wrong !!!' });
+        } else {
+            return res.json({ message: "Status Updated Successfully !!!", data: result });
         }
-        return res.json(data);
+    })
+}
+
+exports.updateQueries = (req, res) => {
+    let query = req.query
+    query = _.extend(query, req.body)
+    query.save((err, result) => {
+        if (err) {
+            return res.status(400).json({ message: 'Something Went Wrong !!!' });
+        } else {
+            return res.json({ message: "Status Updated Successfully !!!", data: result });
+        }
     })
 }
