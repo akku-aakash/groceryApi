@@ -1,5 +1,7 @@
 const Razorpay = require('razorpay');
 const shortid = require('shortid');
+const Timeslot = require('../models/timeslots')
+const _ = require('lodash')
 
 var razorpay = new Razorpay({
     key_id: 'rzp_test_uvifYhgFxSWOdD',
@@ -24,26 +26,60 @@ exports.generatePay = (req, res) => {
 
 }
 
-// exports.capturePay = (req, res) => {
+exports.addslot = (req, res) => {
+    const timeslott = req.body.timeslot;
+    const tim = new Timeslot({
+        slots: timeslott
+    })
+    Timeslot.find().exec((err, orders) => {
+        if (err) {
+            return res.status(400).json({
+                error: err,
+            });
+        }
+        if (orders.length === 0) {
+            tim.save((err, data) => {
+                if (err) {
+                    return res.status(400).json({ message: 'Something went wrong !!' });
+                } else {
+                    return res.json(data);
+                }
+            })
+        } else {
+            return res.status(400).json({ message: 'Data already present !!!' });
+        }
+    });
+}
 
-//     const secret = '12345678'
+exports.findbysId = (req, res, next, id) => {
+    Timeslot.findById(id).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: 'Something went wrong !!!' });
+        } else {
+            req.timeslot = data;
+            next()
+        }
+    })
+}
 
-//     console.log(req.body)
+exports.read = (req, res) => {
+    Timeslot.find().exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: 'Something went wrong !!!' });
+        } else {
+            return res.json(data);
+        }
+    })
+};
 
-//     const crypto = require('crypto')
-
-//     const shasum = crypto.createHmac('sha256', secret)
-//     shasum.update(JSON.stringify(req.body))
-//     const digest = shasum.digest('hex')
-
-//     console.log(digest, req.headers['x-razorpay-signature'])
-
-//     if (digest === req.headers['x-razorpay-signature']) {
-//         console.log('request is legit')
-//         // process it
-//         require('fs').writeFileSync('payment1.json', JSON.stringify(req.body, null, 4))
-//     } else {
-//         // pass it
-//     }
-//     res.json({ status: 'ok' })
-// }
+exports.updateSlot = (req, res) => {
+    let banner = req.timeslot
+    banner = _.extend(banner, req.body)
+    banner.save((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: 'Something went wrong !!' });
+        } else {
+            return res.json(data);
+        }
+    })
+}
