@@ -47,6 +47,7 @@ const orderSchema = new mongoose.Schema(
     tax: { type: Number },
     deliveryCharge: { type: Number },
     offPrice: { type: Number },
+    scheduleTime: { type: String }
   },
   {
     timestamps: true,
