@@ -20,7 +20,9 @@ const Userschema = new mongoose.Schema({
     address: [{
         city: String,
         address: String,
-        zip: Number
+        zip: Number,
+        lang: String,
+        long: String
     }],
     role: {
         type: Number,

@@ -112,6 +112,8 @@ exports.updateAddress = (req, res) => {
       city: req.body.city,
       address: req.body.address,
       zip: req.body.zip,
+      lang: req.body.lang,
+      long: req.body.long
     },
   ];
   // user = _.extend(user, {add})
@@ -128,7 +130,7 @@ exports.updateAddress = (req, res) => {
 
 exports.editAddress = async (req, res) => {
   let user = await req.profile;
-  const { _id, city, address, zip } = req.body
+  const { _id, city, address, zip, lang, long } = req.body
   var index = null;
 
   await user.address.forEach((doc, ind) => {
@@ -143,6 +145,8 @@ exports.editAddress = async (req, res) => {
       city: city,
       address: address,
       zip: zip,
+      lang: lang,
+      long: long
     }
   }
 
