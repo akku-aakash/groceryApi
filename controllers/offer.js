@@ -53,6 +53,15 @@ exports.list = (req, res) => {
     })
 }
 
+exports.listOp = (req, res) => {
+    Offer.find().exec((err, data) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        return res.json(data);
+    })
+}
+
 
 exports.updatenow = (req, res) => {
     let banner = req.offer

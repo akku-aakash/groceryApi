@@ -18,7 +18,7 @@ const UserRouter = require('./routers/user')
 const OrderRouter = require('./routers/order')
 const CityRouter = require('./routers/cites')
 const OfferRouter = require('./routers/offer')
-const QueriesRouter  = require('./routers/queries')
+const QueriesRouter = require('./routers/queries')
 const FeedbackRouter = require('./routers/feedback')
 const SubscriptionRouter = require('./routers/subscription')
 const CancellationRouter = require('./routers/cancellation')
@@ -26,6 +26,7 @@ const Razorpay = require('./routers/razorpay')
 const BannerRouter = require('./routers/banner')
 const AnalyticsRouter = require('./routers/analytics')
 const Subs = require('./routers/subscribe')
+const Disformem = require('./routers/disformem')
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -56,6 +57,7 @@ app.use('/api', Razorpay)
 app.use('/api', BannerRouter)
 app.use('/api', AnalyticsRouter)
 app.use('/api', Subs)
+app.use('/api', Disformem)
 
 
 app.use('', (req, res) => {

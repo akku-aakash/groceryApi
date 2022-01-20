@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { create, list, getByID, readSingle, remove,
-    updateImage, updatenow
+    updateImage, updatenow, listOp
 } = require('../controllers/offer');
 const multer = require('multer')
 
@@ -20,6 +20,7 @@ var upload = multer({ storage: storage })
 router.get('/offers/:offerId', readSingle)
 router.post('/offer/create', upload.single('banner'), create);
 router.get('/offer', list);
+router.get('/alloffers', listOp)
 router.put('/update/offers/:offerId', updatenow)
 router.put('/update/image/offers/:offerId', upload.single('banner'), updateImage)
 router.delete('/delete/offers/:offerId', remove)
