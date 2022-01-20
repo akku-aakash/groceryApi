@@ -25,6 +25,7 @@ const CancellationRouter = require('./routers/cancellation')
 const Razorpay = require('./routers/razorpay')
 const BannerRouter = require('./routers/banner')
 const AnalyticsRouter = require('./routers/analytics')
+const Subs = require('./routers/subscribe')
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -54,6 +55,7 @@ app.use('/api', CancellationRouter)
 app.use('/api', Razorpay)
 app.use('/api', BannerRouter)
 app.use('/api', AnalyticsRouter)
+app.use('/api', Subs)
 
 
 app.use('', (req, res) => {

@@ -37,6 +37,9 @@ const Userschema = new mongoose.Schema({
         type: String,
         default: 'member'
     },
+    subscriptionTime: {
+        type: String
+    },
     fcmtoken: {
         type: String
     }
