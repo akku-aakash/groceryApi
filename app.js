@@ -27,6 +27,7 @@ const BannerRouter = require('./routers/banner')
 const AnalyticsRouter = require('./routers/analytics')
 const Subs = require('./routers/subscribe')
 const Disformem = require('./routers/disformem')
+const Emailser = require('./routers/emailservice')
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -58,7 +59,7 @@ app.use('/api', BannerRouter)
 app.use('/api', AnalyticsRouter)
 app.use('/api', Subs)
 app.use('/api', Disformem)
-
+app.use('/api', Emailser)
 
 app.use('', (req, res) => {
     res.send('Api Route Not Found !!!')
