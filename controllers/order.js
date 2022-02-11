@@ -66,8 +66,8 @@ exports.listOrders = (req, res) => {
 exports.deliveryBoy = (req, res) => {
   const { delId, date } = req.query;
   if (delId && date) {
-    Order.find({ $and: [{ deliveryBoy: delId }, { createdAt: { $gt: date } }] })
-      .sort("-createdAt")
+    Order.find({ $and: [{ deliveryBoy: delId }, { expectedDelivery: { $gt: date } }] })
+      .sort("-expectedDelivery")
       .exec((err, orders) => {
         if (err) {
           return res.status(400).json({
@@ -78,7 +78,7 @@ exports.deliveryBoy = (req, res) => {
       });
   } else if (delId && !date) {
     Order.find({ deliveryBoy: delId })
-      .sort("-createdAt")
+      .sort("-expectedDelivery")
       .exec((err, orders) => {
         if (err) {
           return res.status(400).json({

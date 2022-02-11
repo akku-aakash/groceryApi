@@ -26,6 +26,38 @@ exports.generatePay = (req, res) => {
 
 }
 
+exports.generateLink = (req, res) => {
+    const { amount, name, email, phone, orderId } = req.body
+    const linkDATA = {
+        upi_link: true,
+        amount: amount,
+        currency: "INR",
+        accept_partial: true,
+        first_min_partial_amount: amount,
+        description: `For order ${orderId} from Wildberries.`,
+        customer: {
+            name: name,
+            email: email,
+            contact: phone
+        },
+        notify: {
+            sms: true,
+            email: true
+        },
+        reminder_enable: true,
+        notes: {
+            order_id: orderId
+        }
+    }
+    razorpay.paymentLink.create(linkDATA, (err, ress) => {
+        if (err) {
+            console.log(err)
+            return res.status(400).json({ message: err })
+        }
+        return res.json(ress)
+    })
+}
+
 exports.addslot = (req, res) => {
     const timeslott = req.body.timeslot;
     const tim = new Timeslot({
