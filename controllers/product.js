@@ -1,6 +1,6 @@
 const Product = require('../models/product')
 const _ = require('lodash')
- 
+
 exports.create = (req, res) => {
     const fields = req.body;
     const filterValue = JSON.parse(fields.filterValue)
@@ -104,6 +104,21 @@ exports.prodductByCat = (req, res) => {
         })
 }
 
+exports.prodductByVar = (req, res) => {
+    const { skip, limit, orderBy } = req.query
+    Product.find(req.body)
+        .sort(orderBy)
+        .skip(parseInt(skip))
+        .limit(parseInt(limit))
+        .exec((err, data) => {
+            if (err) {
+                console.log(err)
+                return res.status(400).json({ message: err });
+            }
+            return res.json(data);
+        })
+}
+
 exports.serachprod = (req, res) => {
     name = req.query.name
     Product.find({ name: { $regex: `${name}`, $options: 'i' } }).exec((err, data) => {
@@ -122,9 +137,9 @@ exports.updateProduct = (req, res) => {
         if (err) {
             return res.status(400).json({ message: 'Something Went Wrong !!!' });
         } else {
-            return res.json({message : "Product Update Successfully !!!" , data: result});
+            return res.json({ message: "Product Update Successfully !!!", data: result });
         }
-    })    
+    })
 }
 
 exports.updateImage = (req, res) => {

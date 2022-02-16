@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { create, lists, serachprod,
     getProductById, singleProduct, 
-    prodductByCat, remove , updateProduct } = require('../controllers/product')
+    prodductByCat, remove , updateProduct, prodductByVar } = require('../controllers/product')
 const multer = require('multer')
 
 var storage = multer.diskStorage({
@@ -20,6 +20,7 @@ router.post('/product/create', upload.array('imgcollection', 8), create);
 router.get('/product', lists)
 router.get('/product/:productId', singleProduct)
 router.post('/productbycat', prodductByCat )
+router.post('/productbyvarient', prodductByVar )
 router.put('/product/update/:productId', updateProduct)
 router.delete('/product/delete/:productId', updateProduct)
 router.get('/search',  serachprod)
