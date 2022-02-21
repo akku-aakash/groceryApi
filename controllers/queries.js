@@ -72,13 +72,39 @@ exports.feedbackCreate = (req, res) => {
 }
 
 exports.queriesCreate = (req, res) => {
-    const { name, email, phone, issues, user } = req.body
+    const fields = req.body;
+    const { name, email, phone, issues, user, orderId } = fields
     const query = new Queries({
         name: name,
         email: email,
         phone: phone,
         issues: issues,
         user: user,
+        banner: req.file.path,
+        orderId: orderId
+        // isSolved: isSolved
+    })
+    query.save((err, data) => {
+        if (err) {
+            return res.status(400).json({ error: err });
+        }
+        return res.json({
+            message: 'Query Added Successfully !',
+            data: data
+        });
+    })
+}
+
+exports.queriesCreatess = (req, res) => {
+    const { name, email, phone, issues, user, orderId } = req.body
+    const query = new Queries({
+        name: name,
+        email: email,
+        phone: phone,
+        issues: issues,
+        user: user,
+        banner: " ",
+        orderId: orderId
         // isSolved: isSolved
     })
     query.save((err, data) => {

@@ -25,6 +25,14 @@ const QueriesSchema = new Schema(
       required: true,
       ref: "User",
     },
+    orderId: {
+      type: ObjectId,
+      required: true,
+      ref: "Order"
+    },
+    banner: {
+      type: String
+    },
     isSolved: {
       type: Boolean,
       default: false,
