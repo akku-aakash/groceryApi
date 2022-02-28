@@ -1,6 +1,7 @@
 const Banner = require('../models/banners')
 const { deleteFile } = require('../helpers/file')
 const _ = require('lodash')
+
 exports.bannerById = (req, res, next, id) => {
     Banner.findById(id).exec((err, data) => {
         if (err) {
