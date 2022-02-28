@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const { create, editsub, getitnow, list, deliverystatus, orderIDdst, 
-    getitnowOp, getitnowOpOp, orderIDdstdst } = require('../controllers/deliverystatus')
+const { create, editsub, getitnow, list, deliverystatus, orderIDdst,
+    getitnowOp, getitnowOpOp, orderIDdstdst, editsubsa } = require('../controllers/deliverystatus')
 
 router.post('/deliveryboystatus/create', create)
 router.get('/deliveryboystatus/list', list)
 router.put('/deliveryboystatus/edit/:deliverystatusId', editsub)
+router.put('/deliveryboystatus/opedit/:deliverystatusId', editsubsa)
 router.get('/deliveryboystatus/:deliverystatusId', getitnow)
 router.get('/deliveryboys/byorderId/:orderIDD', getitnowOp)
 router.get('/deliveryboys/bydelId/:delIDD', getitnowOpOp)

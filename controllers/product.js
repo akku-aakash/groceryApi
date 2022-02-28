@@ -143,7 +143,7 @@ exports.updateProduct = (req, res) => {
 }
 
 exports.updateImage = (req, res) => {
-    const vaarr = req.category
+    const vaarr = req.product
     if (vaarr.banner) {
         try {
             deleteFile(vaarr.banner)

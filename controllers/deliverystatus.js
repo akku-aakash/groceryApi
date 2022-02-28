@@ -99,3 +99,23 @@ exports.editsub = (req, res) => {
         }
     })
 }
+
+exports.editsubsa = (req, res) => {
+    let banner = req.deliverystats
+    const { pickupaddress, pickuplat, pickuplong, deliveryBoy } = req.body
+    banner = _.extend(banner, {
+        pickup: {
+            address: pickupaddress,
+            lat: pickuplat,
+            long: pickuplong,
+        },
+        deliveryBoy: deliveryBoy,
+    })
+    banner.save((err, result) => {
+        if (err) {
+            return res.json({ message: err });
+        } else {
+            return res.json(result);
+        }
+    })
+}
