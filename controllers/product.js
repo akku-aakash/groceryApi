@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const { deleteFile } = require('../helpers/file')
 const _ = require('lodash')
 
 exports.create = (req, res) => {
@@ -143,21 +144,39 @@ exports.updateProduct = (req, res) => {
 }
 
 exports.updateImage = (req, res) => {
-    const vaarr = req.product
-    if (vaarr.banner) {
-        try {
-            deleteFile(vaarr.banner)
-        } catch (err) {
-            console.log(err)
-        }
-    }
-    let banner = req.category
-    banner = _.extend(banner, { banner: req.file.path })
+    var vaarr = req.product.imgcollection
+    vaarr.push(req.file.path)
+
+    banner = _.extend(req.product, { imgcollection:  vaarr})
     banner.save((err, result) => {
         if (err) {
             return res.json({ message: err });
         } else {
             return res.json(result);
+        }
+    })
+}
+
+exports.deleteImg = (req, res) => {
+    const { imgOP } = req.body
+    var vaarr = req.product.imgcollection
+    var indess = vaarr.indexOf(imgOP)
+    if (indess != -1) {
+        vaarr.splice(indess, 1);
+    }
+    if (imgOP) {
+        try {
+            deleteFile(imgOP)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    banner = _.extend(req.product, { imgcollection: vaarr })
+    banner.save((err, result) => {
+        if (err) {
+            return res.json({ message: err });
+        } else {
+            return res.json({ message: "Image Deleted Successfully !!!" });
         }
     })
 }

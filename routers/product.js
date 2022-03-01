@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { create, lists, serachprod,
-    getProductById, singleProduct, 
+    getProductById, singleProduct, updateImage, deleteImg,
     prodductByCat, remove , updateProduct, prodductByVar } = require('../controllers/product')
 const multer = require('multer')
 
@@ -22,7 +22,9 @@ router.get('/product/:productId', singleProduct)
 router.post('/productbycat', prodductByCat )
 router.post('/productbyvarient', prodductByVar )
 router.put('/product/update/:productId', updateProduct)
-router.delete('/product/delete/:productId', updateProduct)
+router.put('/product/update/img/:productId', upload.single('banner'), updateImage)
+router.put('/product/update/del/:productId', deleteImg)
+router.delete('/product/delete/:productId', remove)
 router.get('/search',  serachprod)
 
 router.param('productId', getProductById);
