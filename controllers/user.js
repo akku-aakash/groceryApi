@@ -195,5 +195,14 @@ exports.swithuserrole = async (req, res) => {
 }
 
 exports.updateUsernow = (req, res) => {
-  let user  = req.profile
+  const user = req.profile;
+  user.fcmtoken = req.body.fcmtoken;
+
+  user.save((err, data) => {
+    if (err) {
+      return res.status(400).json({ message: err });
+    } else {
+      return res.json({ message: "FCM token updated successfully !!!", data });
+    }
+  });
 }

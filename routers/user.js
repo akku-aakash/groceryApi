@@ -11,7 +11,8 @@ const {
   updateAddress,
   editAddress,
   serachprod,
-  swithuserrole
+  swithuserrole,
+  updateUsernow
 } = require("../controllers/user");
 const { isAuth, requireSignin } = require("../controllers/auth");
 const multer = require("multer");
@@ -41,7 +42,12 @@ router.get("/deliveryboy", deliveryBoy);
 router.get('/search/user', serachprod)
 router.put("/update/wallet/:userId", updateWallet);
 router.put("/switch/role/:userId", swithuserrole);
-
+router.put(
+  "/user/details/:userId",
+  // requireSignin,
+  // isAuth,
+  updateUsernow
+);
 router.get("/admin/allusers", lists);
 router.get("/admin/user/:userId", getUserById);
 
