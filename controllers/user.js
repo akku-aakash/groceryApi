@@ -25,7 +25,7 @@ exports.updateUser = (req, res) => {
   user.firstName = req.body.firstName;
   user.lastName = req.body.lastName;
   user.email = req.body.email;
-  user.imgURL = req.file.path;
+  user.imgURL = req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "";
   user.address = [
     ...user.address,
     {

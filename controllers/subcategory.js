@@ -21,7 +21,7 @@ exports.create = (req, res) => {
     const fields = req.body;
     const subcat = new Subcategory({
         name: fields.name,
-        banner: req.file.path,
+        banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "",
         active: fields.active,
         parentId: fields.parentId,
         upToOff: fields.upToOff,
@@ -80,7 +80,7 @@ exports.updateImage = (req, res) => {
         }
     }
     let banner = req.subcat
-    banner = _.extend(banner, { banner: req.file.path })
+    banner = _.extend(banner, { banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "",})
     banner.save((err, result) => {
         if (err) {
             return res.json({ message: err });

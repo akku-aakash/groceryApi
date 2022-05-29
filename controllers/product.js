@@ -8,7 +8,7 @@ exports.create = (req, res) => {
     const prices = JSON.parse(fields.prices)
     const tablespecs = JSON.parse(fields.tablespecs)
     const specs = JSON.parse(fields.specs)
-    const imgcollection = req.files.map((doc) => doc.path)
+    const imgcollection = req.files.map((doc) => doc.path ? doc.path.replaceAll(/\\/g, "/") : "")
     console.log(
         filterValue,
         prices,
@@ -47,7 +47,7 @@ exports.create = (req, res) => {
 }
 
 exports.lists = (req, res) => {
-    Product.find().populate('category').populate('leafCategory').populate('subCategory').exec((err, data) => {
+    Product.find().exec((err, data) => {
         if (err) {
             return res.status(400).json({ message: err });
         }
@@ -145,9 +145,10 @@ exports.updateProduct = (req, res) => {
 
 exports.updateImage = (req, res) => {
     var vaarr = req.product.imgcollection
-    vaarr.push(req.file.path)
+    var slls = req.file.path ? req.file.path.replaceAll(/\\/g, "/") : ""
+    vaarr.push(slls)
 
-    banner = _.extend(req.product, { imgcollection:  vaarr})
+    banner = _.extend(req.product, { imgcollection: vaarr })
     banner.save((err, result) => {
         if (err) {
             return res.json({ message: err });

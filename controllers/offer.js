@@ -24,7 +24,7 @@ exports.create = (req, res) => {
 
     const leafcat = new Offer({
         title: fields.title,
-        banner: req.file.path,
+        banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "",
         description: fields.description,
         perUserLimit: fields.perUserLimit,
         active: fields.active,
@@ -85,7 +85,7 @@ exports.updateImage = (req, res) => {
         }
     }
     let banner = req.offer
-    banner = _.extend(banner, { banner: req.file.path })
+    banner = _.extend(banner, { banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "", })
     banner.save((err, result) => {
         if (err) {
             return res.json({ message: err });
