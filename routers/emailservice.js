@@ -5,8 +5,8 @@ const nodemailer = require('nodemailer');
 const transport = {
     service: 'gmail',
     auth: {
-        user: 'hksales@ashoktrading.com',
-        pass: 'HKsales@123'
+        user: 'wildberriesindiasales@gmail.com',
+        pass: 'gmgmzzinrcdzigzq'
     }
 };
 const transporter = nodemailer.createTransport(transport);
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport(transport);
 router.post('/email/placingorder', (req, res) => {
     const { email, subject, status, orderId, taxx, amount, orderItemlength, shippingcharge, expecteddelivery, address, city, zip } = req.body;
     const mail = {
-        from: 'app.reselling@gmail.com',
+        from: 'cartsandcutsnoreply@gmail.com',
         to: email,
         subject: subject || 'testing',
         html: `
@@ -96,7 +96,7 @@ router.post('/email/placingorder', (req, res) => {
                 <td align="center" style="background-color: #eeeeee;" bgcolor="#eeeeee">
                     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                         <tr>
-                            <td align="center" valign="top" style="font-size:0; padding: 35px;" bgcolor="#542752">
+                            <td align="center" valign="top" style="font-size:0; padding: 35px;" bgcolor="#af2929">
                                 <div
                                     style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;">
                                     <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%"
@@ -106,7 +106,7 @@ router.post('/email/placingorder', (req, res) => {
                                                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; line-height: 48px;"
                                                 class="mobile-center">
                                                 <h1 style="font-size: 36px; font-weight: 800; margin: 0; color: #ffffff;" class="heading-op">
-                                                    Wildberries</h1>
+                                                    Cart & Cuts</h1>
                                             </td>
                                         </tr>
                                     </table>
@@ -223,7 +223,7 @@ router.post('/email/placingorder', (req, res) => {
                             </td>
                         </tr>
                          <tr>
-                            <td align="center" style=" padding: 35px; background-color: #74547c;" bgcolor="#1b9ba3">
+                            <td align="center" style=" padding: 35px; background-color: #b04646;" bgcolor="#b04646">
                                 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                                     <tr>
                                         <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
@@ -234,7 +234,7 @@ router.post('/email/placingorder', (req, res) => {
                                         <td align="center" style="padding: 25px 0 15px 0;">
                                             <table border="0" cellspacing="0" cellpadding="0">
                                                 <tr>
-                                                    <td align="center" style="border-radius: 5px;" bgcolor="#542752"> <a href="https://wild-berriess.netlify.app/" target="_blank" style="font-size: 18px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #542752; padding: 15px 30px; border: 1px solid #542752; display: block;">Shop Again</a> </td>
+                                                    <td align="center" style="border-radius: 5px;" bgcolor="#af2929"> <a href="https://wild-berriess.netlify.app/" target="_blank" style="font-size: 18px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #af2929; padding: 15px 30px; border: 1px solid #af2929; display: block;">Shop Again</a> </td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -286,7 +286,7 @@ router.post('/email/placingorder', (req, res) => {
                                 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                                     style="max-width:600px;">
                                     <tr>
-                                        <td align="center"> <img src="https://firebasestorage.googleapis.com/v0/b/frutx-farmer.appspot.com/o/logo.66dd640d.jfif?alt=media&token=be88bab0-3cda-4ff5-bcc5-d8bea4844946" width="50" height="50"
+                                        <td align="center"> <img src="https://firebasestorage.googleapis.com/v0/b/hamrokitchen-46133.appspot.com/o/logo_tapas.png?alt=media&token=ab12a4f5-ef7a-4afd-9f93-ff6a2d1bb9c0" width="250" height="50"
                                                 style="display: block; border: 0px;" /> </td>
                                     </tr>
                                     <tr>
@@ -334,9 +334,8 @@ router.post('/email/placingorder', (req, res) => {
 
 router.post('/order/changestatus', (req, res) => {
     const { email, subject, status, orderId, taxx, amount, orderItemlength, shippingcharge, expecteddelivery, address, city, zip } = req.body;
-    console.log(req.body)
     const mail = {
-        from: 'app.reselling@gmail.com',
+        from: 'cartsandcutsnoreply@gmail.com',
         to: email,
         subject: subject || 'testing',
         html: `
@@ -418,7 +417,7 @@ router.post('/order/changestatus', (req, res) => {
                 <td align="center" style="background-color: #eeeeee;" bgcolor="#eeeeee">
                     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                         <tr>
-                            <td align="center" valign="top" style="font-size:0; padding: 35px;" bgcolor="#542752">
+                            <td align="center" valign="top" style="font-size:0; padding: 35px;" bgcolor="#af2929">
                                 <div
                                     style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;">
                                     <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%"
@@ -428,7 +427,7 @@ router.post('/order/changestatus', (req, res) => {
                                                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; line-height: 48px;"
                                                 class="mobile-center">
                                                 <h1 style="font-size: 36px; font-weight: 800; margin: 0; color: #ffffff;" class="heading-op">
-                                                    Wildberries</h1>
+                                                    Cart & Cuts</h1>
                                             </td>
                                         </tr>
                                     </table>
@@ -545,7 +544,7 @@ router.post('/order/changestatus', (req, res) => {
                             </td>
                         </tr>
                          <tr>
-                            <td align="center" style=" padding: 35px; background-color: #74547c;" bgcolor="#1b9ba3">
+                            <td align="center" style=" padding: 35px; background-color: #b04646;" bgcolor="#b04646">
                                 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                                     <tr>
                                         <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
@@ -556,7 +555,7 @@ router.post('/order/changestatus', (req, res) => {
                                         <td align="center" style="padding: 25px 0 15px 0;">
                                             <table border="0" cellspacing="0" cellpadding="0">
                                                 <tr>
-                                                    <td align="center" style="border-radius: 5px;" bgcolor="#542752"> <a href="https://wild-berriess.netlify.app/" target="_blank" style="font-size: 18px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #542752; padding: 15px 30px; border: 1px solid #542752; display: block;">Shop Again</a> </td>
+                                                    <td align="center" style="border-radius: 5px;" bgcolor="#af2929"> <a href="https://wild-berriess.netlify.app/" target="_blank" style="font-size: 18px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #af2929; padding: 15px 30px; border: 1px solid #af2929; display: block;">Shop Again</a> </td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -608,7 +607,7 @@ router.post('/order/changestatus', (req, res) => {
                                 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                                     style="max-width:600px;">
                                     <tr>
-                                        <td align="center"> <img src="https://firebasestorage.googleapis.com/v0/b/frutx-farmer.appspot.com/o/logo.66dd640d.jfif?alt=media&token=be88bab0-3cda-4ff5-bcc5-d8bea4844946" width="50" height="50"
+                                        <td align="center"> <img src="https://firebasestorage.googleapis.com/v0/b/hamrokitchen-46133.appspot.com/o/logo_tapas.png?alt=media&token=ab12a4f5-ef7a-4afd-9f93-ff6a2d1bb9c0" width="250" height="50"
                                                 style="display: block; border: 0px;" /> </td>
                                     </tr>
                                     <tr>
