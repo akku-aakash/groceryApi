@@ -93,7 +93,7 @@ exports.verifyOTP = (req, res) => {
                   expiresIn: "14d",
                 }
               );
-              return res.json({ token, userdata: { ...userdata, newUser: false } });
+              return res.json({ token, userdata: {...userdata._doc, "newUser": false} });
             }
           });
         } else {
