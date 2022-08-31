@@ -46,7 +46,7 @@ exports.updateUser = (req, res) => {
 };
 
 exports.lists = (req, res) => {
-  User.find().exec((err, data) => {
+  User.find({role:0}).exec((err, data) => {
     if (err) {
       return res.status(400).json({ message: err });
     }
