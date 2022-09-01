@@ -19,7 +19,6 @@ exports.singleBanner = (req, res) => {
 
 exports.createBanner = (req, res) => {
     const fields = req.body;
-    console.log(req.file)
     const category = new Banner({
         banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "",
         altText: fields.altText,
@@ -70,7 +69,7 @@ exports.updateImage = (req, res) => {
     }
     let banner = req.banner
     console.log(req.file)
-    banner = _.extend(banner, { banner: req.file.path ? req.file.path.toString().replaceAll(/\\/g, "/") : "", })
+    banner = _.extend(banner, { banner: req.file.path ? req.file.path : "", })
     banner.save((err, result) => {
         if (err) {
             return res.json({ message: err });
