@@ -69,7 +69,7 @@ exports.updateImage = (req, res) => {
         }
     }
     let banner = req.banner
-    banner = _.extend(banner, { banner: req.file.path ? req.file?.path?.toString()?.replaceAll(/\\/g, "/") : "", })
+    banner = _.extend(banner, { banner: req.file.path ? req.file.path.toString().replaceAll(/\\/g, "/") : "", })
     banner.save((err, result) => {
         if (err) {
             return res.json({ message: err });
