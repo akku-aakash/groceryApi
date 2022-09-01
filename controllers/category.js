@@ -10,7 +10,7 @@ exports.create = async (req, res) => {
     const category = new Category({
         name: fields.name,
         active: fields.active,
-        banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "",
+        banner: req.file.path ? req.file.path : "",
         filters: filters,
         upToOff: fields.upToOff,
         description: fields.description
@@ -80,7 +80,7 @@ exports.updateImage = (req, res) => {
         }
     }
     let banner = req.category
-    banner = _.extend(banner, { banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "", })
+    banner = _.extend(banner, { banner: req.file.path ? req.file.path : "", })
     banner.save((err, result) => {
         if (err) {
             return res.json({ message: err });

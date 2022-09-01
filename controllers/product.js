@@ -8,7 +8,7 @@ exports.create = (req, res) => {
     const prices = JSON.parse(fields.prices)
     const tablespecs = JSON.parse(fields.tablespecs)
     const specs = JSON.parse(fields.specs)
-    const imgcollection = req.files.map((doc) => doc.path ? doc.path.replaceAll(/\\/g, "/") : "")
+    const imgcollection = req.files.map((doc) => doc.path ? doc.path : "")
     console.log(
         filterValue,
         prices,
@@ -145,7 +145,7 @@ exports.updateProduct = (req, res) => {
 
 exports.updateImage = (req, res) => {
     var vaarr = req.product.imgcollection
-    var slls = req.file.path ? req.file.path.replaceAll(/\\/g, "/") : ""
+    var slls = req.file.path ? req.file.path : ""
     vaarr.push(slls)
 
     banner = _.extend(req.product, { imgcollection: vaarr })

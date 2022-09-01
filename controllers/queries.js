@@ -80,7 +80,7 @@ exports.queriesCreate = (req, res) => {
         phone: phone,
         issues: issues,
         user: user,
-        banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "",
+        banner: req.file.path ? req.file.path : "",
         orderId: orderId
         // isSolved: isSolved
     })
