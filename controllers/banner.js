@@ -19,7 +19,7 @@ exports.singleBanner = (req, res) => {
 
 exports.createBanner = (req, res) => {
     const fields = req.body;
-
+    console.log(req.file)
     const category = new Banner({
         banner: req.file.path ? req.file.path.replaceAll(/\\/g, "/") : "",
         altText: fields.altText,
