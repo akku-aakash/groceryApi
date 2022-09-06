@@ -48,9 +48,9 @@ exports.updateUser = (req, res) => {
 exports.updateUserwithoutimg = (req, res) => {
   const user = req.profile;
 
-  user.firstName = req.body?.firstName;
-  user.lastName = req.body?.lastName;
-  user.email = req.body?.email;
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
+  user.email = req.body.email;
   user.address = [
     ...user.address,
     {
