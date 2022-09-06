@@ -59,6 +59,7 @@ exports.updateUserwithoutimg = (req, res) => {
       zip: req.body.zip,
     },
   ];
+  user.imgURL =  "";
   user.copounsused = [];
 
   user.save((err, data) => {
