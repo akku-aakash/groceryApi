@@ -80,13 +80,13 @@ exports.list = (req, res) => {
 
 exports.editsub = (req, res) => {
     let banner = req.deliverystats
-    const { deliveryaddaddress, deliveryaddlat, deliveryaddlong, modeofpayment, Cancelled, statusChange } = req.body
+    const { modeofpayment, Cancelled, statusChange } = req.body
     banner = _.extend(banner, {
-        deliveryadd: {
-            address: deliveryaddaddress,
-            lat: deliveryaddlat,
-            long: deliveryaddlong,
-        },
+        // deliveryadd: {
+        //     address: deliveryaddaddress,
+        //     lat: deliveryaddlat,
+        //     long: deliveryaddlong,
+        // },
         modeofpayment: modeofpayment,
         Cancelled: Cancelled,
         statusChange: statusChange

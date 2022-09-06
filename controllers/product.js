@@ -47,7 +47,11 @@ exports.create = (req, res) => {
 }
 
 exports.lists = (req, res) => {
-    Product.find().exec((err, data) => {
+    Product.find()
+    .populate('category', 'name')
+    .populate('leafCategory', 'name')
+    .populate('subCategory', 'name')
+    .exec((err, data) => {
         if (err) {
             return res.status(400).json({ message: err });
         }
