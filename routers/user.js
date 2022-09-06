@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   userById,
   deliveryBoy,
+  updateUserwithoutimg,
   read,
   updateUser,
   lists,
@@ -35,6 +36,12 @@ router.put(
   isAuth,
   upload.single(`photo`),
   updateUser
+);
+router.put(
+  "/user/completeprofile/:userId",
+  requireSignin,
+  isAuth,
+  updateUserwithoutimg
 );
 router.put('/user/add/address/:userId', updateAddress)
 router.put('/user/edit/address/:userId', editAddress)

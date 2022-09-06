@@ -45,6 +45,31 @@ exports.updateUser = (req, res) => {
   });
 };
 
+exports.updateUserwithoutimg = (req, res) => {
+  const user = req.profile;
+
+  user.firstName = req.body?.firstName;
+  user.lastName = req.body?.lastName;
+  user.email = req.body?.email;
+  user.address = [
+    ...user.address,
+    {
+      city: req.body.city,
+      address: req.body.address,
+      zip: req.body.zip,
+    },
+  ];
+  user.copounsused = [];
+
+  user.save((err, data) => {
+    if (err) {
+      return res.status(400).json({ message: err });
+    } else {
+      return res.json({ message: "User updated Successfully", data });
+    }
+  });
+};
+
 exports.lists = (req, res) => {
   User.find({role:0}).exec((err, data) => {
     if (err) {
