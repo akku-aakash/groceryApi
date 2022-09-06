@@ -47,11 +47,7 @@ exports.updateUser = (req, res) => {
 
 exports.updateUserwithoutimg = (req, res) => {
   var user = req.profile;
-  console.log(user, req.body)
-
-  if (user.imgURL) {
-    deleteFile(user.imgURL);
-  }
+  console.log(req.body, req.profile)
   user = _.extend(user, {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
