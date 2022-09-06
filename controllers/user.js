@@ -47,7 +47,7 @@ exports.updateUser = (req, res) => {
 
 exports.updateUserwithoutimg = (req, res) => {
   var user = req.profile;
-  console.log(req.body, req.profile)
+
   user = _.extend(user, {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -63,7 +63,7 @@ exports.updateUserwithoutimg = (req, res) => {
     imgURL: "",
     copounsused: user.copounsused ? user.copounsused : []
   })
-  console.log(user)
+
   user.save((err, data) => {
     if (err) {
       return res.status(400).json({ message: err });
