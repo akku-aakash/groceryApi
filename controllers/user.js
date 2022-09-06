@@ -60,7 +60,7 @@ exports.updateUserwithoutimg = (req, res) => {
         zip: req.body.zip,
       },
     ] : user.address,
-    imgURL: "",
+    imgURL: user.imgURL ? user.imgURL : "",
     copounsused: user.copounsused ? user.copounsused : []
   })
 
