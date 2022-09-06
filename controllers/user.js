@@ -17,7 +17,7 @@ exports.read = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  const user = req.profile;
+  let user = req.profile;
 
   if (user.imgURL) {
     deleteFile(user.imgURL);
@@ -26,15 +26,15 @@ exports.updateUser = (req, res) => {
   user.lastName = req.body.lastName;
   user.email = req.body.email;
   user.imgURL = req.file.path ? req.file.path : "";
-  user.address = [
+  user.address = (req.body.city && req.body.address) ? [
     ...user.address,
     {
       city: req.body.city,
       address: req.body.address,
       zip: req.body.zip,
     },
-  ];
-  user.copounsused = [];
+  ] : user.address;
+  user.copounsused = user.copounsused ? user.copounsused : [];
 
   user.save((err, data) => {
     if (err) {
@@ -52,14 +52,14 @@ exports.updateUserwithoutimg = (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    address: [
+    address: user.address = (req.body.city && req.body.address) ? [
       ...user.address,
       {
         city: req.body.city,
         address: req.body.address,
         zip: req.body.zip,
-      }
-    ],
+      },
+    ] : user.address,
     imgURL: "",
     copounsused: user.copounsused ? user.copounsused : []
   })
